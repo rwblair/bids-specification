@@ -101,3 +101,36 @@ SpoilingGradient:
     fields:
         SpoilingGradientMoment: RECOMMENDED
         SpoilingGradientDuration: RECOMMENDED
+
+Behavioral:
+    selectors:
+        - datatype == "beh"
+    fields:
+        TaskName: RECOMMENDED
+        Instructions: RECOMMENDED
+        TaskDescription: RECOMMENDED
+        CogAtlasID: RECOMMENDED
+        CogPOID: RECOMMENDED
+        InstitutionName: RECOMMENDED
+        InstitutionAddress: RECOMMENDED
+        InstitutionalDepartmentName: RECOMMENDED
+
+GeneticInfo:
+    selectors:
+        - filename == "genetic_info.json"
+    fields:
+        GeneticLevel: REQUIRED
+        AnalyticalApproach: OPTIONAL
+        SampleOrigin: REQUIRED
+        TissueOrigin: OPTIONAL
+        BrainLocation: OPTIONAL
+        CellType: OPTIONAL
+
+GeneticDatasetDescription:
+    selectors:
+        - sidecar.Genetics exists
+    fields:
+        Genetics:
+            Dataset: REQUIRED
+            Database: OPTIONAL
+            Descriptors: OPTIONAL
