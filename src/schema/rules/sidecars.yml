@@ -104,6 +104,7 @@ SpoilingGradient:
         SpoilingGradientMoment: RECOMMENDED
         SpoilingGradientDuration: RECOMMENDED
 
+<<<<<<< HEAD
 MRISpatialEncoding:
     selectors:
     - modality == "MRI"
