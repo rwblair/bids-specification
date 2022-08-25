@@ -1,10 +1,8 @@
 # Changelog
 
-## [schema-0.3.1](https://github.com/bids-standard/bids-specification/tree/schema-0.3.1) (2022-08-16)
+## [Unreleased](https://github.com/bids-standard/bids-specification/tree/HEAD)
 
-## [schema-0.3.0](https://github.com/bids-standard/bids-specification/tree/schema-0.3.0) (2022-08-16)
-
--   \[MISC] Remove label format and inheritane principle redundancies in fMRI section [#1197](https://github.com/bids-standard/bids-specification/pull/1197) ([Remi-Gau](https://github.com/Remi-Gau))
+-   \[MISC] Remove label format and inheritance principle redundancies in fMRI section [#1197](https://github.com/bids-standard/bids-specification/pull/1197) ([Remi-Gau](https://github.com/Remi-Gau))
 -   \[FIX] add recommendation to fully omit non-compulsory data that is n/a [#1171](https://github.com/bids-standard/bids-specification/pull/1171) ([sappelhoff](https://github.com/sappelhoff))
 -   \[FIX] Discourage use of "sample" in events if sampling frequency is ambiguous, add guidelines for precision [#1140](https://github.com/bids-standard/bids-specification/pull/1140) ([sappelhoff](https://github.com/sappelhoff))
 -   \[FIX] Clarify MEG empty-room recommendations [#1125](https://github.com/bids-standard/bids-specification/pull/1125) ([robertoostenveld](https://github.com/robertoostenveld))
