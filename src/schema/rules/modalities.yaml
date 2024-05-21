@@ -31,3 +31,6 @@ motion:
 nirs:
   datatypes:
     - nirs
+phenotype:
+  datatypes:
+    - phenotype
