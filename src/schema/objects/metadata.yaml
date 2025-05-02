@@ -3878,48 +3878,6 @@ StimulusPresentation:
       $ref: objects.metadata.SoftwareVersion
     Code:
       $ref: objects.metadata.Code
-StimulusPresentation__eyetrack__required:
-  name: StimulusPresentation
-  display_name: Stimulus Presentation
-  description: |
-    Object containing key-value pairs related to the software used to present
-    the stimuli during the experiment.
-  type: object
-  required:
-    - ScreenDistance
-    - ScreenOrigin
-    - ScreenResolution
-    - ScreenSize
-  recommended:
-    - OperatingSystem
-    - ScreenRefreshRate
-    - SoftwareName
-    - SoftwareRRID
-    - SoftwareVersion
-    - Code
-    - HeadStabilization
-  properties:
-    OperatingSystem:
-      $ref: objects.metadata.OperatingSystem
-    ScreenDistance:
-      $ref: objects.metadata.ScreenDistance
-    ScreenOrigin:
-      $ref: objects.metadata.ScreenOrigin
-    ScreenRefreshRate:
-      $ref: objects.metadata.ScreenRefreshRate
-    ScreenResolution:
-      $ref: objects.metadata.ScreenResolution
-    ScreenSize:
-      $ref: objects.metadata.ScreenSize
-    SoftwareName:
-      $ref: objects.metadata.SoftwareName
-    SoftwareRRID:
-      $ref: objects.metadata.SoftwareRRID
-    SoftwareVersion:
-      $ref: objects.metadata.SoftwareVersion
-    Code:
-      $ref: objects.metadata.Code
-
 StopTime_eyetrack:
   name: StopTime
   display_name: Eye-tracking recording stop time

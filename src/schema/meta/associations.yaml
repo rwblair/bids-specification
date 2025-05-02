@@ -21,6 +21,14 @@ events:
     extension: .tsv
   inherit: true
 
+events_sidecar:
+  selectors:
+    - sidecar.PhysioType == "eyetrack"
+  target:
+    suffix: events
+    extension: .json
+  inherit: true
+
 aslcontext:
   selectors:
     - suffix == 'asl'

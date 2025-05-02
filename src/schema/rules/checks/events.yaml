@@ -43,3 +43,18 @@ SortedOnsets:
   checks:
     # n/a values will likely cause false alarms if encountered. Consider alternatives.
     - allequal(sorted(columns.onset, "numeric"), columns.onset)
+
+EyetrackRequirements:
+  issue:
+    code: EYETRACK_METADATA_MISSING
+    message: |
+      The existence of eyetracking data requires the precence of ScreenDistance, ScreenOrigin, ScreenResolution,
+      and ScreenSize in the corresponding events.json file.
+    level: Error
+    selectors:
+      - sidecar.PhysioType == "eyetrack"
+    checks:
+      - associations.events_sidecar.ScreenDistance != null
+      - associations.events_sidecar.ScreenOrigin != null
+      - associations.events_sidecar.ScreenResolution != null
+      - associations.events_sidecar.ScreenSize != null
