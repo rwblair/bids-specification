@@ -590,6 +590,7 @@
             "properties": {
               "level": { "$ref": "#/definitions/enums/requirement_level" },
               "level_addendum": { "type": "string" },
+              "description": { "type": "string" },
               "description_addendum": { "type": "string" },
               "issue": { "$ref": "#/definitions/ruleTypes/issue" }
             },
