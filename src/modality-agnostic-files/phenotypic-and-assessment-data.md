@@ -30,39 +30,40 @@ in the BIDS dataset and `participants.tsv` file.
     It is REQUIRED to aggregate all participant data into
     one TSV per tabular phenotypic file.
 
-In phenotypic and assessment data each measurement tool has
-an independent aggregated data TSV file in which the user collects
-all subjects, sessions, and/or runs of data as one entry per row
-(with a row defined by the smallest unit of acquisition). In other words:
-
-1.  Each row MUST start with `participant_id`.
-
-1.  Each TSV file SHOULD contain a `session_id` column
-when multiple [sessions](../glossary.md#session-entities) are present
-in the data set regardless of whether those sessions are in
-the `phenotype/` data, `sub-<label>/` data, or a combination of the two.
-
-1.  If more than one of the same measurement tool is acquired
-within the same `session_id`, a `run` column SHOULD be added.
-
-1.  To encode the acquisition time for a measurement tool’s `session_id`,
-add the `session_id` to the sessions file
-and include the OPTIONAL `acq_time` column.
-
 !!! success "Guideline 3"
 
     For [best tabular phenotypic data](../appendices/phenotype.md):
 
-    | **Column name**  | **Requirement** | **Description** |
-    | :--------------- | :-------------- | :-------------- |
-    | `participant_id` | REQUIRED        | MUST be the first column in the file. Note that data for one participant MAY be represented across multiple rows in case of multiple sessions or runs, and therefore the entry in the `participant_id` column will be repeated. |
-    | `session _id`    | CONDITIONAL ; If sessions are defined in the dataset | A `session_id` column MUST be added to all tabular files in the phenotype directory as soon as multiple sessions are present in the data set regardless of whether those sessions are in the  `phenotype/` data, `sub-<label>/` data, or a combination of the two. |
-    | `run`            | CONDITIONAL ; If there are multiple runs within any session | A chronological `run` number is used when a measurement tool or assessment described by a tabular file was repeated within a session. |
-    | `acq_time`       | OPTIONAL        | If acquisition time is available, the `acq_time` column CAN be used to record the time of acquisition of each row in the tabular file. |
+    Each measurement tool SHOULD have an independent
+    aggregated data TSV file in which the user collects all subjects, sessions,
+    and/or runs of data as one entry per row (with a row defined by
+    the smallest unit of acquisition). In other words:
 
-    Furthermore, if you have to add a `session_id` column to the tabular phenotypic data, you then MUST also introduce a session directory to the imaging data, even if only one imaging session has been created. This rule can be considered as "**if anyone uses sessions, everyone uses sessions**." And vice versa, if imaging data has session directories, all imaging data and tabular phenotypic data MUST have sessions.
+    1.  Each row MUST start with `participant_id`.
+    1.  Each TSV file MUST contain a `session_id` column when
+      multiple [sessions](../glossary.md#session-entities) are present
+      in the data set regardless of whether those sessions are in
+      the `phenotype/` data, `sub-<label>/` data, or a combination of the two.
+    1.  If more than one of the same measurement tool is acquired within
+      the same `session_id`, a `run_id` column MUST be added.
+    1.  To encode the acquisition time for a measurement tool’s `session_id`,
+      add the `session_id` to the sessions file and
+      include the OPTIONAL `acq_time` column.
 
-    This produces a file in which same-participant entries can take up as many rows as needed according to the smallest unit of acquisition. The combination of values in the `participant_id`, `session_id`, and `run` (if present) columns MUST be unique for the entire tabular file.
+    To see this guideline summarized as a table,
+    see [the appendix](../appendices/phenotype.md#to-summarize-this-guideline-as-a-table).
+
+    Furthermore, if you have to add a `session_id` column to the tabular phenotypic data,
+    you then MUST also introduce a session directory to the imaging data,
+    even if only one imaging session has been created.
+    This rule can be considered as "**if anyone uses sessions, everyone uses sessions**."
+    And vice versa, if imaging data has session directories,
+    all imaging data and tabular phenotypic data MUST have sessions.
+
+    This produces a file in which same-participant entries can take up as many rows as needed
+    according to the smallest unit of acquisition.
+    The combination of values in the `participant_id`, `session_id`, and `run_id` (if present)
+    columns MUST be unique for the entire tabular file.
 
 As with all other tabular data, the additional phenotypic information files
 MAY be accompanied by a JSON file describing the columns in detail

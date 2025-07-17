@@ -37,13 +37,13 @@ the smallest unit of acquisition). In other words:
   the `phenotype/` data, `sub-<label>/` data, or a combination of the two.
 
 1.  If more than one of the same measurement tool is acquired within
-  the same `session_id`, a `run` column MUST be added.
+  the same `session_id`, a `run_id` column MUST be added.
 
 1.  To encode the acquisition time for a measurement tool’s `session_id`,
   add the `session_id` to the sessions file and
   include the OPTIONAL `acq_time` column.
 
-To summarize this guideline as a table:
+#### To summarize this guideline as a table
 
 <!-- This block generates a columns table.
 The definitions of these fields can be found in
@@ -62,7 +62,7 @@ all imaging data and tabular phenotypic data MUST have sessions.
 
 This produces a file in which same-participant entries can take up as many rows
 as needed according to the smallest unit of acquisition.
-The combination of values in the `participant_id`, `session_id`, and `run` (if present)
+The combination of values in the `participant_id`, `session_id`, and `run_id` (if present)
 columns MUST be unique for the entire tabular file.
 
 ### 4. Add `MeasurementToolMetadata` to each tabular phenotypic measurement tool
