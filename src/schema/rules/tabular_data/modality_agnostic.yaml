@@ -18,6 +18,15 @@ Participants:
   index_columns: [participant_id]
   additional_columns: allowed
 
+
+Participants__phenotype:
+  $ref: rules.tabular_data.modality_agnostic.Participants
+  selectors:
+    - '"Guidelines" in dataset.dataset_description'
+    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - path == "/participants.tsv"
+  additional_columns: allowed_if_defined
+
 Phenotypes:
   selectors:
     - extension == ".tsv"
