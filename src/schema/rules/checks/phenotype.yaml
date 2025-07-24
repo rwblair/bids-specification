@@ -11,7 +11,7 @@ PhenotypeSubjectsMissing:
     level: error
   selectors:
     - datatype == 'phenotype'
-    - suffix == '.tsv'
+    - extension == '.tsv'
     - type(dataset.subjects.participant_id) != 'null'
   checks:
     - |
@@ -19,3 +19,50 @@ PhenotypeSubjectsMissing:
         sorted(intersects(columns.participant_id, dataset.subjects.participant_id)),
         sorted(dataset.subjects.participant_id)
       )
+
+PhenotypeAggregation:
+  issue:
+    code: PHENOTYPE_SESSIONS_NOT_AGGREGATED
+    message: |
+      All sessions data must be aggregated in a single TSV at the root of the dataset.
+    level: error
+    selectors:
+      - '"Guidelines" in dataset.dataset_description'
+      - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+      - suffix == 'sessions' && entities.subject
+    checks:
+      - false
+
+PhenotypeSessionLevels:
+  issue:
+    code: SESSION_ID_MISSING_LEVELS
+    message: |
+      The Sessions JSON data dictionary session_id field MUST include `Levels`
+      with the description of each session_id.
+    level: error
+  selectors:
+    - '"Guidelines" in dataset.dataset_description'
+    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - suffix == 'sessions' && extension == '.tsv'
+    - '"session_id" in columns
+  checks:
+    - '"session_id" in sidecar'
+    - '"Levels" in sidecar.session_id'
+
+PhenotypeSessionDemographics:
+  issue:
+    code: MISSING_DEMOGRAPHICS
+    message: |
+      It is RECOMMENDED to house Demographics data in the phenotype/ directory
+      as a TSV called demographics.tsv and its corresponding data dictionary
+      JSON called demographics.json when `session_id` is used in tabular
+      phenotypic data.
+    level: warning
+    selectors:
+      - '"Guidelines" in dataset.dataset_description'
+      - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+      - datatype == 'phenotype'
+      - extension == '.tsv'
+      - "'session_id' in columns"
+    checks:
+      - exists("phenotype/demographics.tsv", "dataset")
