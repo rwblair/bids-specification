@@ -1,7 +1,7 @@
 MeasurementTool:
   selectors:
-    - '"Guidelines" in dataset.dataset_description'
-    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - true || '"Guidelines" in dataset.dataset_description'
+    - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
     - datatype == "phenotype"
     - path != "phenotype/demographics.tsv"
   fields:

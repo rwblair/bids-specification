@@ -23,13 +23,15 @@ Participants:
 Participants__phenotype:
   $ref: rules.tabular_data.modality_agnostic.Participants
   selectors:
-    - '"Guidelines" in dataset.dataset_description'
-    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - true || '"Guidelines" in dataset.dataset_description'
+    - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
     - path == "/participants.tsv"
   additional_columns: allowed_if_defined
 
-Phenotypes:
+Phenotype__extended:
   selectors:
+    - true || '"Guidelines" in dataset.dataset_description'
+    - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
     - datatype == 'phenotype'
     - extension == ".tsv"
   initial_columns:
@@ -65,7 +67,7 @@ Phenotypes:
       description: |
         If acquisition time is available, the `acq_time` column CAN be used
         to record the time of acquisition of each row in the tabular file.
-  index_columns: [participant_id, session_id, run_id, acq_time__scans]
+  # index_columns: [participant_id, session_id, run_id, acq_time__scans]
   additional_columns: allowed_if_defined
 
 Samples:
@@ -100,6 +102,7 @@ Sessions:
   selectors:
     - suffix == "sessions"
     - extension == ".tsv"
+    - path != "/sessions.tsv"
   initial_columns:
     - session_id
   columns:
@@ -114,29 +117,39 @@ Sessions:
   additional_columns: allowed
 
 Sessions__phenotype:
-  $ref: rules.tabular_data.modality_agnostic.Sessions
   selectors:
     - suffix == "sessions"
     - extension == ".tsv"
-    - '"Guidelines" in dataset.dataset_description'
-    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - true || '"Guidelines" in dataset.dataset_description'
+    - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
   initial_columns:
     - participant_id
     - session_id
   columns:
-    $ref: rules.tabular_data.modality_agnostic.Sessions.columns
-    acq_time__sessions: recommended
+    participant_id: required
+    session_id:
+      level: optional
+      description_addendum: |
+        REQUIRED if sessions are present in dataset. 
+    acq_time__sessions: optional
+    pathology: recommended
+    HED: optional
   additional_columns: allowed_if_defined
 
 Phenotype:
   selectors:
-    - datatype == 'phenotype'
+    - datatype == "phenotype"
+    - extension == ".tsv"
   initial_columns:
     - participant_id
+    - session_id
   columns:
     participant_id: required
+    session_id:
+      level: optional
+      description_addendum: |
+        REQUIRED if sessions are present in dataset. 
     HED: optional
-  index_columns: [participant_id]
   additional_columns: allowed
 
 Demographics:

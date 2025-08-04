@@ -15,10 +15,8 @@ PhenotypeSubjectsMissing:
     - type(dataset.subjects.participant_id) != 'null'
   checks:
     - |
-      allequal(
-        sorted(intersects(columns.participant_id, dataset.subjects.participant_id)),
-        sorted(dataset.subjects.participant_id)
-      )
+        length(intersects(columns.participant_id, dataset.subjects.participant_id)) ==
+        length(columns.participant_id)
 
 PhenotypeAggregation:
   issue:
@@ -27,8 +25,8 @@ PhenotypeAggregation:
       All sessions data must be aggregated in a single TSV at the root of the dataset.
     level: error
     selectors:
-      - '"Guidelines" in dataset.dataset_description'
-      - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+      - true || '"Guidelines" in dataset.dataset_description'
+      - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
       - suffix == 'sessions' && entities.subject
     checks:
       - false
@@ -41,10 +39,10 @@ PhenotypeSessionLevels:
       with the description of each session_id.
     level: error
   selectors:
-    - '"Guidelines" in dataset.dataset_description'
-    - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+    - true || '"Guidelines" in dataset.dataset_description'
+    - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
     - suffix == 'sessions' && extension == '.tsv'
-    - '"session_id" in columns
+    - '"session_id" in columns'
   checks:
     - '"session_id" in sidecar'
     - '"Levels" in sidecar.session_id'
@@ -59,10 +57,10 @@ PhenotypeSessionDemographics:
       phenotypic data.
     level: warning
     selectors:
-      - '"Guidelines" in dataset.dataset_description'
-      - interestects(dataset.dataset_description.Guidelines, ["phenotype"])
+      - true || '"Guidelines" in dataset.dataset_description'
+      - true || interestects(dataset.dataset_description.Guidelines, ["phenotype"])
       - datatype == 'phenotype'
       - extension == '.tsv'
-      - "'session_id' in columns"
+      - '"session_id" in columns'
     checks:
       - exists("phenotype/demographics.tsv", "dataset")
